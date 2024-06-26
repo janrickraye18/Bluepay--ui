@@ -1,0 +1,31 @@
+
+a{
+  text-decoration: none;
+}
+@font-face {
+  font-family:myFirstfont;
+  src: url(/font/Wavepool.ttf);
+}
+
+*{
+
+  font-family: myFirstfont;
+}
+
+
+body{
+  margin: 0;
+  background-color: #2C7AFF;
+/* background-image: url(../src/pages/images/istockphoto-1371714013-612x612.jpg);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+background-attachment: fixed; */
+}
+a{
+  text-decoration: none;
+}
+
+
+
+
