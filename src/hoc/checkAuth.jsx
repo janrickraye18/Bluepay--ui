@@ -8,7 +8,7 @@ const checkAuth = (WrappedComponent) => {
   const Authenticate = (props) => {
     const user = useSelector((state) => state.auth.user);
     const [cookies, setCookie, removeCookie] = useCookies()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch()                                                                                              
 
     if (!user) {
         if (cookies.AUTH_TOKEN){
