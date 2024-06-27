@@ -27,6 +27,6 @@ const checkAuth = (WrappedComponent) => {
   };
 
   return Authenticate;
-};
+}
 
-export default checkAuth; 
+export default checkAuth

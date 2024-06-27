@@ -61,7 +61,10 @@ export default function Register() {
 
     <Box id="body">
     <Box id="header">
-      <Box id="navbar">                                                         
+      <Box id="navbar"> 
+      <Typography id="Bluepay" variant="h5">
+      Bluepay
+     </Typography>                                                        
       <Link to="/About" id="navlink" className="navlink"> 
       About us
       </Link>

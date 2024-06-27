@@ -1,30 +1,35 @@
 import {Box, Container,Typography, } from '@mui/material'
 import { Link } from 'react-router-dom'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../navbar.css'
 import { useSelector } from 'react-redux'
 import { DataGrid } from '@mui/x-data-grid'
-import { Cookies } from 'react-cookie'
+import {useCookies} from 'react-cookie'
+import { index } from '../api/user'
 
 export default function Home() {
+  // const [rows,setRows] = useState([])
+  // const user = useSelector(state => state.auth.user)
+  // const [cookies,setCookie,removeCookie] = useCookies()
+  // const columns = [
+  //   {field: 'id', headerName:'ID'},
+  //   {field: 'name', headerName:'Username'},
+  //   {field: 'first_name', headerName:'First Name'},
+  //   {field: 'last_name', headerName:'Last Name'},
+  //   {field: 'address', headerName:'Address'}
+                                
+  // ]                  
+
   // const refreshData = () => {
-  //   index(Cookies.AUTH_TOKEN).then(res =>{
-  //     console.log(res)
+  //   index(cookies.AUTH_TOKEN).then(res =>{
+  //     if(res?.ok){
+  //       setRows(res.data)
+  //     }else{
+  //       toast.error(res?.message ?? "Something went wrong")
+  //     }
   //   })
   // }
   // useEffect(refreshData,[])
-
-  const user = useSelector(state => state.auth.user)
-  const columns = [
-    {field: 'id', headerName:'ID'},
-    {field: 'name', headerName:'Username'},
-    {field: 'first_name', headerName:'First Name'},
-    {field: 'last_name', headerName:'Last Name'},
-    {field: 'address', headerName:'Address'}
-                                
-  ]                  
-
-  const rows=[]
   return (
 
 <Container>
@@ -35,21 +40,21 @@ export default function Home() {
       Bluepay
      </Typography>
 
-      <Link to="/About" id="navlink" className="navlink"> 
-      About us
+      <Link to="/userlist" id="navlink" className="navlink"> 
+      User's list
       </Link>
-      <Link to="/login" id="navlink" className="navlink"> 
-      Login
+      <Link to="/About" id="navlink" className="navlink"> 
+     About us
       </Link>
       |
-      <Link to="/register" id="navlink" className="navlink"> 
-      Sign Up
+      <Link to="/login" id="navlink" className="navlink"> 
+      Sign out
       </Link>
       </Box>
     </Box>                          
     </Box>
 
-<Box>
+{/* <Box>
 <Typography variant='h1'>Hello,{user?.name ?? "Guest"}</Typography>
 {
   user ? (
@@ -59,7 +64,7 @@ export default function Home() {
   ):null
   
 }
-</Box>
+</Box> */}
 
 
 </Container>

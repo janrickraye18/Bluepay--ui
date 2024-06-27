@@ -26,3 +26,14 @@ export const login = async (body) => {
     
     return await response.json()
     }
+
+    export const checkToken = async (token) => {
+        const response = await fetch(`${url}/checkToken`,{
+            methodL:'GET',
+            headers:{
+                Accept: 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return await response.json()
+    }

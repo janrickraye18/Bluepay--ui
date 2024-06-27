@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import About from './pages/About'
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
+import Userlist from './pages/Userlist'
 
 
 
@@ -27,6 +28,10 @@ function App() {
     {
       path:'/About',
       element: <About />
+    },
+    {
+      path:'/userlist',
+      element: <Userlist />
     },
   ])
  
