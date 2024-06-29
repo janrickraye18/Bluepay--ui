@@ -10,6 +10,8 @@ import { Provider } from 'react-redux'
 import Userlist from './pages/Userlist'
 import Dashboard from './pages/Dashboard'
 import Order from './pages/Order'
+import { createTheme } from '@mui/material'
+import Admin from './pages/Admin'
 
 
 
@@ -40,6 +42,11 @@ function App() {
     {
       path:'/order',
       element: <Order />
+    },
+  
+    {
+      path:'/admin',
+      element: <Admin />
     },
   ])
  

@@ -1,9 +1,9 @@
-import {AppBar, Toolbar, Box, Container, Typography, IconButton } from '@mui/material'
+import {AppBar, Toolbar, Box, Container, Typography, IconButton, Dialog, DialogTitle, DialogContent } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {  product } from '../api/user'
+import { index } from '../api/product'
 import { DataGrid } from '@mui/x-data-grid'
 import { toast } from 'react-toastify'
 
@@ -11,17 +11,21 @@ import { toast } from 'react-toastify'
 
 export default function Order() {
     const [rows,setRows] = useState([])
-    const products = useSelector(state => state.auth.product)
+    const user = useSelector(state => state.auth.user)
     const [cookies,setCookie,removeCookie] = useCookies()
     const columns = [
-      {field: 'id', headerName:'ID'},
+      {field: 'id', headerName:'Products'},
       {field: 'item', headerName:'Item'},
       {field: 'price', headerName:'Price'},
-                                  
+      {field: 'actions', headerName:'', sortable: false, filterable: false, renderCell: params => {
+        <Box>
+          
+        </Box>
+      }},
     ]                  
   
     const refreshData = () => {
-      product(cookies.AUTH_TOKEN).then(res =>{
+      index(cookies.AUTH_TOKEN).then(res =>{
         if(res?.ok){
           setRows(res.data)
         }else{
@@ -60,9 +64,18 @@ export default function Order() {
         <Box>
         {/* <Typography variant='h1' sx={{mt: 10}}>Hello, {user?.name ?? "Guest"}</Typography> */}
         {
-          product ? (
+          index ? (
             <Box sx={{mt:2, backgroundColor: "white", display: "flex", mt: 15}}>
               <DataGrid sx={{height:'500px', width: 100, fontFamily: "Arial", boxShadow: "0px 0px 10px"}} columns={columns} rows={rows}/>
+
+              <Dialog open={true}>
+                <DialogTitle>
+                  <Typography id="font">Add Order</Typography>
+                </DialogTitle>
+                <DialogContent>
+                  hello
+                </DialogContent>
+              </Dialog>
             </Box>
           ):null
           

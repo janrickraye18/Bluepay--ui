@@ -3,30 +3,27 @@ import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { index } from '../api/user'
+import { index } from '../api/order'
 import { DataGrid } from '@mui/x-data-grid'
 import checkAuth from '../hoc/checkAuth'
 
-function Dashboard() {
+function Admin() {
     const [rows,setRows] = useState([])
     const user = useSelector(state => state.auth.user)
     const [cookies,setCookie,removeCookie] = useCookies()
     const columns = [
-      {field: 'id', headerName:'Users'},
-      {field: 'name', headerName:'Username'},
-      {field: 'first_name', headerName:'First Name'},
-      {field: 'last_name', headerName:'Last Name'},
-      {field: 'address', headerName:'Address'}
-
+      {field: 'id', headerName:'Orders'},
+      {field: 'customer_id', headerName:'Customer ID'},
+      {field: 'product_id', headerName:'Product ID'},
+      {field: 'quantity', headerName:'Quantity'},
+      {field: 'address', headerName:'Address'},
+      {field: 'delivery_date', headerName:'Delivery Date'},
+      {field: 'hasPaid', headerName:'Has Paid'},
     ]                  
   
     const refreshData = () => {
       index(cookies.AUTH_TOKEN).then(res =>{
         if(res?.ok){
-          res.data = res.data.map(d => {
-            d = {...d, ...d.customer}
-            return d
-          })
           setRows(res.data)
         }else{
           toast.error(res?.message ?? "Something went wrong")
@@ -45,11 +42,11 @@ function Dashboard() {
             Bluepay
           </Typography>
           <Link to="/about" id="navlink" className="navlink"> 
-          About Us
+          Customers
           </Link>
           |
           <Link to="/order" id="navlink" className="navlink"> 
-          Order
+          Products
           </Link>
         </Toolbar>
       </AppBar>
@@ -58,9 +55,9 @@ function Dashboard() {
 
 
     <Box>
-    <Typography id="font" variant='h1' sx={{ mt:10, fontSize: 50, color: "white"}}>Hello, {user?.customer?.first_name ?? "Guest"}</Typography>
+    <Typography id="font" variant='h1' sx={{ mt:10, fontSize: 50, color: "white"}}>Hello, Admin</Typography>
     {
-      user ? (
+      index ? (
         <Box sx={{mt:2}}>
           <DataGrid sx={{height:'500px', backgroundColor: "#9AD0C2", boxShadow:"0 0 10px", border: "2px solid black", fontFamily: "Arial", fontWeight: "bold"}} columns={columns} rows={rows}/>
         </Box>
@@ -72,4 +69,4 @@ function Dashboard() {
   )
 }
 
-export default checkAuth(Dashboard)
+export default checkAuth(Admin)

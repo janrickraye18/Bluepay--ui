@@ -62,13 +62,14 @@ export default function Start() {
 </Box> */}
 <Box sx={{minHeight:'80vh',display:'flex',justifyContent:'center', alignItems:'center'}}>
 <Box sx={{textAlign: "center", }}>
-  <Typography variant='h1' sx={{color: "white", fontSize: 40, margin: 2, fontFamily: "myFirstfont", color: "#EBF4F6"}}>
+  <Typography  id="font" variant='h1' sx={{color: "#F1FADA", fontSize: 40, margin: 2}}>
     Welcome to Bluepay!
   </Typography>
-  <Typography variant='h1' sx={{ fontSize: 50, margin: 2, fontFamily: "myFirstfont", color: "#EBF4F6"}}>
+  <Typography  id="font" variant='h1' sx={{ color: "#F1FADA", fontSize: 40, margin: 2}}>
     Get Started
   </Typography>
-  <Box sx={{display:'flex', justifyContent: "space-between"}}>
+
+  <Box sx={{display:'flex', justifyContent: "center",mt: 5, gap: 10}}>
   <Button variant="contained" href="/login"sx={{fontSize: 20}}>Login</Button>
   <Button variant="contained" href="/register"sx={{fontSize: 20}}>Sign Up</Button>
   </Box>
