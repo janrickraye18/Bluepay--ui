@@ -8,6 +8,8 @@ import About from './pages/About'
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import Userlist from './pages/Userlist'
+import Dashboard from './pages/Dashboard'
+import Order from './pages/Order'
 
 
 
@@ -26,12 +28,18 @@ function App() {
       element: <Register />
     },
     {
-      path:'/About',
+      path:'/about',
       element: <About />
     },
+
     {
-      path:'/userlist',
-      element: <Userlist />
+      path:'/dashboard',
+      element: <Dashboard />
+    },
+
+    {
+      path:'/order',
+      element: <Order />
     },
   ])
  

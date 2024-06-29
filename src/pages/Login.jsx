@@ -1,4 +1,4 @@
-import { Box, Button, Container, TextField, Typography } from '@mui/material'
+import { Box, Button, Container, TextField, Typography, AppBar, Toolbar, IconButton } from '@mui/material'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import gif from '../pages/images/Gif.gif'
@@ -7,6 +7,9 @@ import { useCookies } from 'react-cookie'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/authSlice'
 import { toast } from 'react-toastify'
+import MenuIcon from '@mui/icons-material/Menu';
+
+
 
 export default function Login() {
   const [name,setName] = useState("")
@@ -23,7 +26,7 @@ export default function Login() {
       if(res?.ok){
         setCookie("AUTH_TOKEN",res.data.token) 
         dispatch(login(res.data))
-        navigate("/")
+        navigate("/dashboard")
         toast.success(res?.message ?? "Logged in Succesfully")
       }else{
         toast.error(res?.message ?? "something went wrong")
@@ -32,46 +35,23 @@ export default function Login() {
   }
   return (
             
-    
-
-
-
     <Container>
-      
-    <Box id="body">
-    <Box id="header">
-      <Box id="navbar">
-      <Typography id="Bluepay" variant="h5">
-      Bluepay
-     </Typography>
 
-      <Link to="/About" id="navlink" className="navlink"> 
-      About us
-      </Link>
-      <Link to="/login" id="navlink" className="navlink"> 
-      Login
-      </Link>
-      |
-      <Link to="/register" id="navlink" className="navlink"> 
-      Sign Up
-      </Link>
-      </Box>
-    </Box>
-    </Box>
-
-
-   <Box sx={{minHeight:'100vh',display:'flex',justifyContent:'center',alignItems:'center',}}>
-    <Box sx={{height: 300,width: 500, boxShadow:'black 0px 0px 20px',borderRadius:2,}}>
-    <Typography variant='h4' sx={{textAlign:'center', mt:2}}>
+   <Box sx={{minHeight:'90vh',display:'flex',justifyContent:'center',alignItems:'center',}}>
+    <Box sx={{height: 350, width: 500, boxShadow:'black 0px 0px 20px', borderRadius:2, backgroundColor: "#E6F4F1"}}>
+    <Typography variant='h1' sx={{
+      textAlign:'center',
+       mt: 3, mb: 3,
+       fontSize: 50 , }}>
              Login
     </Typography> 
     <Box component="form" onSubmit={onSubmit} sx={{width:300, mx:'auto'}}>
         <Box sx={{mt:1}}> 
-        <TextField onChange={(e)  => setName(e.target.value)} value={name} fullWidth size='small' type='text' label='username'>
+        <TextField id='input' onChange={(e)  => setName(e.target.value)} value={name} fullWidth size='small' type='text' label='Username' >
         </TextField>
         </Box>
         <Box sx={{mt:1}}> 
-        <TextField onChange={(e)=> setPassword(e.target.value) } value={password} fullWidth size='small' type='password' label='password'>
+        <TextField id='input' onChange={(e)=> setPassword(e.target.value) } value={password} fullWidth size='small' type='password' label='Password'>
         </TextField>
         </Box>
         <Box sx={{mt:1,textAlign:'center' }}>

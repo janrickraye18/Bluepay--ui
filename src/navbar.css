@@ -1,46 +1,35 @@
-*{
-    
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
- 
-}
 @font-face {
     font-family:myFirstfont;
     src: url(/font/Wavepool.ttf);
-  }
+}
 
-#header{
+#header {
     padding: 10px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(79, 190, 255, 0.658);
+    background-color: #008E9B;
     text-align: right;
     z-index: 999;
     margin: auto;
 }
 
-
-
-
-
-#navlink{
+#navlink {
     padding: 5px;
     font-size: 18px;
     color: black;
     padding: 10px;
     cursor: pointer;
 }
-#Bluepay{
-    
+
+#bluepay {
+
     font-family: myFirstfont;
-     display: flex;
+    display: flex;
     text-align: left;
     position: fixed;
-    top: 20px;
-    left: 10px;
+    left: 50px;
     right: 0;
-
+    color: black;
 }

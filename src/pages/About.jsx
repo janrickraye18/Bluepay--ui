@@ -1,4 +1,4 @@
-import { Box, Container, Typography  } from '@mui/material'
+import {AppBar, Toolbar, Box, Container, Typography , IconButton} from '@mui/material'
 import { Link } from 'react-router-dom'
 import React from 'react'
 import img1 from '../pages/images/water.jpg'
@@ -10,25 +10,34 @@ import '../About.css'
 export default function About() {
   return (
     <Container>
-    <Box id="body">
-    <Box id="header">
-      <Box id="navbar">
-      <Typography id="Bluepay" variant="h5">
-      Bluepay
-     </Typography>
 
-      <Link to="/About" id="navlink" className="navlink"> 
-      About us
-      </Link>
-      <Link to="/login" id="navlink" className="navlink"> 
-      Login
-      </Link>
-      |
-      <Link to="/register" id="navlink" className="navlink"> 
-      Sign Up
-      </Link>
-      </Box>
-    </Box>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="fixed" sx={{backgroundColor: "#008E9B"}}>
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 ,color: "black", fontFamily: "MyFirstFont"}}>
+            Bluepay
+          </Typography>
+          <Link to="/dashboard" id="navlink" className="navlink"> 
+          Dashboard
+          </Link>
+          |
+          <Link to="/about" id="navlink" className="navlink"> 
+          About Us
+          </Link>
+          |
+          <Link to="/order" id="navlink" className="navlink"> 
+          Order
+          </Link>
+        </Toolbar>
+      </AppBar>
     </Box>
      
 

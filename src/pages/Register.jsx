@@ -42,7 +42,7 @@ export default function Register() {
       toast.success(res?.message ?? "Account  has been Registered");
       setCookie("AUTH_TOKEN", res.data.token)
       dispatch(login(res.data))
-      navigate("/")
+      navigate("/dashboard")
       console.log(res)
      }
      else{
@@ -57,44 +57,16 @@ export default function Register() {
 }
   return (
   <Container>
-
-
-    <Box id="body">
-    <Box id="header">
-      <Box id="navbar"> 
-      <Typography id="Bluepay" variant="h5">
-      Bluepay
-     </Typography>                                                        
-      <Link to="/About" id="navlink" className="navlink"> 
-      About us
-      </Link>
-      <Link to="/login" id="navlink" className="navlink"> 
-      Login
-      </Link>
-      |
-      <Link to="/register" id="navlink" className="navlink"> 
-      Sign Up
-      </Link>
-      </Box>
-    </Box>
-    </Box>
-    
-  
-
  
+    <Box sx={{minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+    <Box id="Regbox" sx={{height: 600, width: 500 , boxShadow: 'black 0px 0px 20px', borderRadius: 4, backgroundColor: "#E6F4F1"}}>
 
-    <Box sx={{minHeight:'100vh',display:'flex',justifyContent:'center',alignItems:'center'}}>
-    <Box id="Regbox" sx={{height:700, width:500 , boxShadow:'white 0px 0px 20px', borderRadius: 4, border:'1px solid white', }}>
-
-      
-     <Typography variant="h4" sx={{textAlign:'center',mt:2}}>
-                <h1 id="registerFont"> Register</h1>
+     <Typography variant="h1" sx={{textAlign: 'center', mt: 3, mb: 2 , fontFamily: "MyFirstFont", fontSize: 40}}>
+                Register
      </Typography>
 
       <Box component="form" onSubmit={onSubmit} sx={{width:300, mx:'auto',}}>
         
-
-
         <Box sx={{mt:1}}>
         <TextField required id="name" type="text" fullWidth size= "small" label="Username"/>
         {
@@ -133,7 +105,7 @@ export default function Register() {
 
 
         <Box sx={{mt:1}}>
-        <TextField required id="password" type="password" fullWidth size= "small" label="password"/>
+        <TextField required id="password" type="password" fullWidth size= "small" label="Password"/>
         {
           warnings?.password ?(
             <Typography sx={{fontSize:12}} component="small" color="error">
@@ -170,13 +142,13 @@ export default function Register() {
         </Box>
 
         <Box sx={{mt:1, textAlign:'center'}}>
-          <Button disabled={loading} type="submit" variant="contained"style={{color:'white',backgroundColor:'black'}}>Submit</Button>
+          <Button disabled={loading} type="submit" variant="contained"sx={{color:'white'}}>Submit</Button>
         </Box>
         
       </Box>
    <Box sx={{mt:2, textAlign:'center'}}>
    <Typography>
-    <Link  to="/login" style={{ marginTop:'1rem',color:'white', fontFamily:'inherit'}}>
+    <Link  to="/login" style={{ marginTop:'1rem', fontFamily:'inherit'}}>
                    Already Have an Account?
     </Link>
     </Typography>

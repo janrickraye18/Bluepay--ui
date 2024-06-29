@@ -1,16 +1,20 @@
-import {Box, Container,Typography, } from '@mui/material'
+import { Box, Button, Container, TextField, Typography, AppBar, Toolbar, IconButton, responsiveFontSizes } from '@mui/material'
 import { Link } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import '../navbar.css'
 import { useSelector } from 'react-redux'
 import { DataGrid } from '@mui/x-data-grid'
-import {useCookies} from 'react-cookie'
-import { index } from '../api/user'
+import { Cookies } from 'react-cookie'
 
-export default function Home() {
-  // const [rows,setRows] = useState([])
+export default function Start() {
+  // const refreshData = () => {
+  //   index(Cookies.AUTH_TOKEN).then(res =>{
+  //     console.log(res)
+  //   })
+  // }
+  // useEffect(refreshData,[])
+
   // const user = useSelector(state => state.auth.user)
-  // const [cookies,setCookie,removeCookie] = useCookies()
   // const columns = [
   //   {field: 'id', headerName:'ID'},
   //   {field: 'name', headerName:'Username'},
@@ -20,41 +24,32 @@ export default function Home() {
                                 
   // ]                  
 
-  // const refreshData = () => {
-  //   index(cookies.AUTH_TOKEN).then(res =>{
-  //     if(res?.ok){
-  //       setRows(res.data)
-  //     }else{
-  //       toast.error(res?.message ?? "Something went wrong")
-  //     }
-  //   })
-  // }
-  // useEffect(refreshData,[])
+  // const rows=[]
   return (
 
 <Container>
-<Box id="body">
+{/* <Box id="body">
 <Box id="header">
       <Box id="navbar">
       <Typography id="Bluepay" variant="h5">
       Bluepay
      </Typography>
 
-      <Link to="/userlist" id="navlink" className="navlink"> 
-      User's list
-      </Link>
       <Link to="/About" id="navlink" className="navlink"> 
-     About us
+      About us
+      </Link>
+      <Link to="/login" id="navlink" className="navlink"> 
+      Login
       </Link>
       |
-      <Link to="/login" id="navlink" className="navlink"> 
-      Sign out
+      <Link to="/register" id="navlink" className="navlink"> 
+      Sign Up
       </Link>
       </Box>
     </Box>                          
     </Box>
 
-{/* <Box>
+<Box>
 <Typography variant='h1'>Hello,{user?.name ?? "Guest"}</Typography>
 {
   user ? (
@@ -65,7 +60,20 @@ export default function Home() {
   
 }
 </Box> */}
-
+<Box sx={{minHeight:'80vh',display:'flex',justifyContent:'center', alignItems:'center'}}>
+<Box sx={{textAlign: "center", }}>
+  <Typography variant='h1' sx={{color: "white", fontSize: 40, margin: 2, fontFamily: "myFirstfont", color: "#EBF4F6"}}>
+    Welcome to Bluepay!
+  </Typography>
+  <Typography variant='h1' sx={{ fontSize: 50, margin: 2, fontFamily: "myFirstfont", color: "#EBF4F6"}}>
+    Get Started
+  </Typography>
+  <Box sx={{display:'flex', justifyContent: "space-between"}}>
+  <Button variant="contained" href="/login"sx={{fontSize: 20}}>Login</Button>
+  <Button variant="contained" href="/register"sx={{fontSize: 20}}>Sign Up</Button>
+  </Box>
+</Box>
+</Box>
 
 </Container>
 
