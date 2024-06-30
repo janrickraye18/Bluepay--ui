@@ -45,7 +45,7 @@ function Admin() {
           Customers
           </Link>
           |
-          <Link to="/order" id="navlink" className="navlink"> 
+          <Link to="/product" id="navlink" className="navlink"> 
           Products
           </Link>
         </Toolbar>

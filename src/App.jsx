@@ -12,6 +12,8 @@ import Dashboard from './pages/Dashboard'
 import Order from './pages/Order'
 import { createTheme } from '@mui/material'
 import Admin from './pages/Admin'
+import Product from './pages/Product'
+import Customer from './pages/Customer'
 
 
 
@@ -47,6 +49,14 @@ function App() {
     {
       path:'/admin',
       element: <Admin />
+    },
+    {
+      path:'/product',
+      element: <Product />
+    },
+    {
+      path:'/customer',
+      element: <Customer />
     },
   ])
  
