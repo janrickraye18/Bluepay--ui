@@ -91,6 +91,10 @@ function Order() {
           <Link to="/order" id="navlink" className="navlink"> 
           Order
           </Link>
+          |
+          <Link to="/login" id="navlink" className="navlink"> 
+          Logout
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>
@@ -100,7 +104,7 @@ function Order() {
         <Box>
         
         {
-          index ? (
+          addOrder ? (
             
             <Box sx={{mt:2, mt: 15}}>
               <Box sx={{ display:"flex", justifyContent:"end" }}>
@@ -113,11 +117,7 @@ function Order() {
                   <Typography id="font" >Add Order</Typography>
                 </DialogTitle>
                 <DialogContent>
-                <Box component="form" onSubmit={onSubmit} sx={{ width:300, mx:'auto' }}>
-
-                <Box sx={{ mt:3 }}>
-                  <TextField required id="delivery_date" type="date" fullWidth size= "small" label="Delivery Date"/>
-                </Box>
+                <Box component="form" onSubmit={onSubmit} sx={{ width:300, mx:'auto' }}>                                                     
         
         <Box sx={{ mt:3 }}>
           <TextField id="product_id" type="text" fullWidth size= "small" label="Product ID"/>
@@ -153,7 +153,7 @@ function Order() {
         </Box>
 
         <Box sx={{ mt:3 }}>
-          <TextField required id="delivery_date" type="date" fullWidth size= "small" label="Delivery Date"/>
+          <TextField required id="delivery_date" type="date" fullWidth size= "small" />
           {
             warnings?.delivery_date ?(
               <Typography sx={{ fontSize:12 }} component="small" color="error">

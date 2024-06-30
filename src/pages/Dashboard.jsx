@@ -51,6 +51,10 @@ function Dashboard() {
           <Link to="/order" id="navlink" className="navlink"> 
           Order
           </Link>
+          |
+          <Link to="/login" id="navlink" className="navlink"> 
+          Logout
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>
