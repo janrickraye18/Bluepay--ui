@@ -7,6 +7,7 @@ import { useState } from 'react'
 import {useCookies} from 'react-cookie'
 import { useDispatch } from 'react-redux'
 import { login } from '../redux/authSlice'
+import '../index.css'
 
 export default function Register() {
 
@@ -50,9 +51,9 @@ export default function Register() {
   return (
   <Container>
  
-    <Box sx={{ minHeight:'90vh', display:'flex', justifyContent:'center', alignItems:'center', mt: 5 }}>
-      <Box sx={{ height:600, width:500 , boxShadow:'black 0px 0px 20px', borderRadius:4, backgroundColor:"#E6F4F1"}} >
-     
+    <Box id="RegBox" sx={{ minHeight:'90vh', display:'flex', justifyContent:'center', mt: 5 }}>
+      <Box id="RegBorder" sx={{ height:600, width:500 , boxShadow:'black 1px 2px  20px 5px', borderRadius:4, backgroundColor:"#E6F4F1"}} >
+      <Box sx={{mr:70,mt:2}}>
         <Typography id="font" variant="h1" sx={{ textAlign:'center', mt:3, mb:3, fontSize:40 }}> 
           Register
         </Typography>
@@ -113,7 +114,7 @@ export default function Register() {
             ):null
           }
         </Box>
-
+                                                  
         <Box sx={{ mt:3 }}>
           <TextField required id="address" fullWidth size="small" label="Address"/>
           {
@@ -138,7 +139,7 @@ export default function Register() {
           </Typography>
         </Link>
       </Box>
-
+</Box>
     </Box>
   </Box>
   </Container>

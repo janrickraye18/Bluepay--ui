@@ -5,6 +5,7 @@ import '../navbar.css'
 import { useSelector } from 'react-redux'
 import { DataGrid } from '@mui/x-data-grid'
 import { Cookies } from 'react-cookie'
+import gif from   '../pages/images/Gif.gif'
 
 export default function Start() {
   // const refreshData = () => {
@@ -60,18 +61,24 @@ export default function Start() {
   
 }
 </Box> */}
-<Box sx={{minHeight:'80vh',display:'flex',justifyContent:'center', alignItems:'center'}}>
-<Box sx={{textAlign: "center", }}>
-  <Typography  id="font" variant='h1' sx={{color: "#F1FADA", fontSize: 40, margin: 2}}>
-    Welcome to Bluepay!
-  </Typography>
-  <Typography  id="font" variant='h1' sx={{ color: "#F1FADA", fontSize: 40, margin: 2}}>
-    Get Started
+<Box id="homeBox"sx={{minHeight:'80vh',display:'flex',justifyContent:'center', alignItems:'center'}}>
+<Box id="home" sx={{textAlign: "center",boxShadow:'1px 2px  20px 5px', }}>
+  {/* <Typography  id="font" variant='h1' sx={{color: "#F1FADA", fontSize: 40, margin: 2}}>
+  <img src={gif} alt="" />
+  </Typography> */}
+  <Typography  id="font" variant='h1' sx={{ color: "#3D3838", fontSize: 40, ml:60, mt: 20}}>
+    Get Started!
   </Typography>
 
-  <Box sx={{display:'flex', justifyContent: "center",mt: 5, gap: 10}}>
-  <Button variant="contained" href="/login"sx={{fontSize: 20}}>Login</Button>
-  <Button variant="contained" href="/register"sx={{fontSize: 20}}>Sign Up</Button>
+  <Box sx={{display:'flex', justifyContent: "center",mt: 3, gap: 10, ml:60}}>
+  <Link to="/login">
+  <Button variant="contained"sx={{fontSize: 20}}>Login</Button>
+  </Link>
+ 
+ <Link to="/register">
+ <Button variant="contained"sx={{fontSize: 20}}>Sign Up</Button>
+ </Link>
+ 
   </Box>
 </Box>
 </Box>

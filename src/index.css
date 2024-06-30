@@ -29,3 +29,56 @@ button{
   font-family:myFirstfont;
   src: url(/font/Wavepool.ttf);
 }
+#gif{
+  margin-bottom: 0;
+}
+#RegBorder{
+background-color: white;
+width: 100%;
+background-image:url(/src/pages/images/waterpic.jpg);
+background-size:contain;
+background-repeat: no-repeat;
+background-position: right;
+margin: auto;
+display: flex;
+flex-direction:column;
+
+}
+#RegBox{
+  margin: auto;
+  display: flex;
+
+}
+#homeBox{
+  padding: 20px;
+}
+#home{
+  border-radius: 20px;
+
+  background-color: white;
+  height: 50vh;
+  width: 90%;
+  background-image:url(/src/pages/images/Gif.gif);
+  background-repeat: no-repeat;
+  background-position: left;
+  margin: auto;
+  display: flex;
+  flex-direction:column;
+}
+#loginBox{
+  margin: auto;
+  display: flex;
+}
+#loginBorder{
+  background-color: white;
+width: 95%;
+background-image:url(/src/pages/images/waterpic.jpg);
+background-size:contain;
+background-repeat: no-repeat;
+background-position: right;
+margin: auto;
+display: flex;
+flex-direction:column;
+}
+
+
