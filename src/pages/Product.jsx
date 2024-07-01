@@ -92,6 +92,10 @@ function Product() {
           <Link to="/product" id="navlink" className="navlink"> 
           Products
           </Link>
+          |
+          <Link to="/login" id="navlink" className="navlink"> 
+          Logout
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>

@@ -41,12 +41,16 @@ function Admin() {
           <Typography id="font"variant="h6" component="div" sx={{ flexGrow:1, fontSize: 20}}>
             Bluepay
           </Typography>
-          <Link to="/about" id="navlink" className="navlink"> 
+          <Link to="/customer" id="navlink" className="navlink"> 
           Customers
           </Link>
           |
           <Link to="/product" id="navlink" className="navlink"> 
           Products
+          </Link>
+          |
+          <Link to="/login" id="navlink" className="navlink"> 
+          Logout
           </Link>
         </Toolbar>
       </AppBar>

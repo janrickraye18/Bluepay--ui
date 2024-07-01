@@ -62,7 +62,7 @@ export default function Login() {
           <Box sx={{ mt:4, textAlign:'center' }}>
             <Link to ="/register">
               <Typography id="font" sx={{color: "#265073", fontSize: 13}}>
-                Don't have account yet?
+                Don't have account an yet?
               </Typography>
             </Link>
           </Box>

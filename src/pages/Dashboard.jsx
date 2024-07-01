@@ -44,6 +44,10 @@ function Dashboard() {
           <Typography id="font"variant="h6" component="div" sx={{ flexGrow:1, fontSize: 20}}>
             Bluepay
           </Typography>
+          <Link to="/admin" id="navlink" className="navlink"> 
+          Dashboard
+          </Link>
+          |
           <Link to="/about" id="navlink" className="navlink"> 
           About Us
           </Link>

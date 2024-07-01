@@ -5,15 +5,17 @@ import { useCookies } from 'react-cookie'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { addProduct, index } from '../api/product'
-import { addOrder } from '../api/order'
 import { DataGrid } from '@mui/x-data-grid'
 import { toast } from 'react-toastify'
 import checkAuth from '../hoc/checkAuth'
 
 
 function Customer() {
+    const [warnings, setWarnings] = useState ({})
+    const [loading, setLoading] = useState(null)
     const [rows,setRows] = useState([])
     const user = useSelector(state => state.auth.user)
+    const [createDialog, setCreateDialog] = useState(false)
     const [editDialog, setEditDialog] = useState(null)
     const [deleteDialog, setDeleteDialog] = useState(null)
     const [cookies,setCookie,removeCookie] = useCookies()
@@ -93,6 +95,10 @@ function Customer() {
           Logout
           </Link>
         </Toolbar>
+        |
+          <Link to="/login" id="navlink" className="navlink"> 
+          Logout
+          </Link>
       </AppBar>
     </Box>
     
