@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import $ from 'jquery'
 import { useCookies } from 'react-cookie'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { index } from '../api/product'
-import { addOrder } from '../api/order'
+import { add } from '../api/order'
 import { DataGrid } from '@mui/x-data-grid'
 import { toast } from 'react-toastify'
 import checkAuth from '../hoc/checkAuth'
@@ -14,19 +14,25 @@ function Order() {
     const [warnings, setWarnings] = useState ({})
     const [loading, setLoading] = useState(null)
     const [rows,setRows] = useState([])
-    const [createDialog, setCreateDialog] = useState(false)
+    const [createDialog, setCreateDialog] = useState(null)
     const user = useSelector(state => state.auth.user)
     const [cookies,setCookie,removeCookie] = useCookies()
+    const navigate = useNavigate()
     const columns = [
-      {field: 'id', headerName:'Products'},
-      {field: 'item', headerName:'Item'},
-      {field: 'price', headerName:'Price'},
-      // {field: 'actions', headerName:'', sortable: false, filterable: false, renderCell: params => (
-      //   <Box>
-      //       <Button onClick={() => setCreateDialog(params.row.id)} variant="contained" sx={{backgroundColor: "#265073"}}>Add Order</Button>
-      //   </Box>
-      // )}
+      {field: 'id', headerName:'Products', minWidth: 300},
+      {field: 'item', headerName:'Item', minWidth: 300},
+      {field: 'price', headerName:'Price', minWidth: 300},
+      {field: 'actions', headerName:'', sortable: false, filterable: false, hideable: false, renderCell: params => (
+        <Box>
+            <Button onClick={() => setCreateDialog(params.row.id)} variant="contained" sx={{backgroundColor: "#265073"}}>Add Order</Button>
+        </Box>
+      ), minWidth: 230}
     ]                  
+
+    const logout = () => {
+      removeCookie("AUTH_TOKEN")
+      removeCookie("ADMIN_TOKEN")
+    }
   
     const refreshData = () => {
       index(cookies.AUTH_TOKEN).then(res =>{
@@ -43,6 +49,7 @@ function Order() {
       e.preventDefault()
       if(!loading){
         const body = {
+          customer_id: user?.cutomer?.id,
           product_id: $("#product_id").val(),
           quantity:$("#quantity").val(),
           address:$("#address").val(),
@@ -50,16 +57,16 @@ function Order() {
         }
   
       setLoading(true)
-      addOrder(body).then(res => {
+      add(body, cookies.AUTH_TOKEN).then(res => {
       if(res?.ok){
         toast.success(res?.message ?? "Order Complete");
-        setCookie("AUTH_TOKEN", res.data.token)
-        dispatch(login(res.data))
         navigate("/dashboard")
         console.log(res)
+        setCreateDialog(null)
       }else {
         toast.error(res?. message ?? "Something went wrong");
         setWarnings(res?.errors)
+        setCreateDialog(null)
       }
        
       }).finally(() => {
@@ -77,7 +84,7 @@ function Order() {
       <AppBar position="fixed" sx={{backgroundColor: "#008E9B"}}>
         <Toolbar>
 
-          <Typography id="font" variant="h6" component="div" sx={{ flexGrow:1, color:"black", ml:3 }}>
+          <Typography id="font" variant="h6" component="div" sx={{ flexGrow:1, fontSize: 20 }}>
             Bluepay
           </Typography>
           <Link to="/dashboard" id="navlink" className="navlink"> 
@@ -92,7 +99,7 @@ function Order() {
           Order
           </Link>
           |
-          <Link to="/login" id="navlink" className="navlink"> 
+          <Link onClick={(logout)} to="/" id="navlink" className="navlink"> 
           Logout
           </Link>
         </Toolbar>
@@ -104,15 +111,12 @@ function Order() {
         <Box>
         
         {
-          addOrder ? (
+          index ? (
             
-            <Box sx={{mt:2, mt: 15}}>
-              <Box sx={{ display:"flex", justifyContent:"end" }}>
-                <Button id="font" onClick={() => setCreateDialog(true)} sx={{ mr:5, mb:3, color:"black", boxShadow:"0 0 10px black", backgroundColor: "#2D9596" }}>Add Order</Button>
-              </Box>
+            <Box sx={{ mt: 15}}>
               <DataGrid sx={{height:'500px', backgroundColor: "#9AD0C2", boxShadow:"0 0 10px", border: "2px solid black", fontFamily: "Arial", fontWeight: "bold"}} columns={columns} rows={rows}/>
 
-              <Dialog open={createDialog}>
+              <Dialog open={!!createDialog}>
                 <DialogTitle>
                   <Typography id="font" >Add Order</Typography>
                 </DialogTitle>
@@ -120,7 +124,7 @@ function Order() {
                 <Box component="form" onSubmit={onSubmit} sx={{ width:300, mx:'auto' }}>                                                     
         
         <Box sx={{ mt:3 }}>
-          <TextField id="product_id" type="text" fullWidth size= "small" label="Product ID"/>
+          <TextField disabled value={createDialog} id="product_id" type="text" fullWidth size= "small" label="Product ID"/>
             {
               warnings?.product_id ?(
                 <Typography sx={{fontSize:12}} component="small" color="error">
@@ -170,8 +174,8 @@ function Order() {
     </Box>
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={() => setCreateDialog(false)}>Close</Button>
-                  <Button onClick={() => {$("#submit_btn").trigger("click")}}>Create</Button>
+                  <Button onClick={() => setCreateDialog(null)}>Close</Button>
+                  <Button disabled={loading} onClick={() => {$("#submit_btn").trigger("click")}}>Create</Button>
                 </DialogActions>
               </Dialog>
             </Box>

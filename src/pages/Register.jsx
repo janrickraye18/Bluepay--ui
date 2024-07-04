@@ -1,8 +1,8 @@
 import { Box, Typography, TextField,Button, Container} from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
-import $ from 'jquery'
 import { register } from '../api/auth'
 import { toast } from 'react-toastify' 
+import $ from 'jquery'
 import { useState } from 'react'
 import {useCookies} from 'react-cookie'
 import { useDispatch } from 'react-redux'
@@ -10,12 +10,11 @@ import { login } from '../redux/authSlice'
 import '../index.css'
 
 export default function Register() {
-
   const [warnings, setWarnings] = useState ({})
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
   const [cookies, setCookie, removeCookie] = useCookies()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const onSubmit = (e)=> {
     e.preventDefault()
@@ -36,9 +35,8 @@ export default function Register() {
       setCookie("AUTH_TOKEN", res.data.token)
       dispatch(login(res.data))
       navigate("/dashboard")
-      console.log(res)
     }else {
-      toast.error(res?. message ?? "Something went wrong");
+      toast.error(res?. message ?? "Something went wrong")
       setWarnings(res?.errors)
     }
      
@@ -63,7 +61,7 @@ export default function Register() {
           <Box sx={{ mt:3 }}>
             <TextField required id="name" type="text" fullWidth size= "small" label="Username"/>
             {
-              warnings?.username ?(
+              warnings?.name ?(
                 <Typography sx={{ fontSize:12 }} component="small" color="error">
                   {warnings.name}
                 </Typography>
@@ -101,7 +99,7 @@ export default function Register() {
                   {warnings.password}
                 </Typography>
               ):null 
-        }
+            }
         </Box>
 
         <Box sx={{mt:3}}>
@@ -127,7 +125,7 @@ export default function Register() {
         </Box>
 
         <Box sx={{ mt:3, textAlign:'center' }}>
-          <Button disabled={loading} type="submit" variant="contained"sx={{color:'white'}}>Register</Button>
+          <Button type="submit" variant="contained"sx={{color:'white'}}>Register</Button>
         </Box>
 
       </Box>

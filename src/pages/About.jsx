@@ -8,13 +8,19 @@ import '../navbar.css'
 import '../About.css'
 
 export default function About() {
+
+  const logout = () => {
+    removeCookie("AUTH_TOKEN")
+    removeCookie("ADMIN_TOKEN")
+  }
+
   return (
     <Container>
 
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{backgroundColor: "#008E9B"}}>
         <Toolbar>
-          <Typography id="font" variant="h6" component="div" sx={{ flexGrow: 1 ,color: "black"}}>
+          <Typography id="font" variant="h6" component="div" sx={{ flexGrow: 1, fontSize: 20}}>
             Bluepay
           </Typography>
           <Link to="/dashboard" id="navlink" className="navlink"> 
@@ -29,7 +35,7 @@ export default function About() {
           Order
           </Link>
           |
-          <Link to="/login" id="navlink" className="navlink"> 
+          <Link onClick={(logout)} to="/" id="navlink" className="navlink"> 
           Logout
           </Link>
         </Toolbar>

@@ -4,17 +4,16 @@ import $ from 'jquery'
 import { useCookies } from 'react-cookie'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { addProduct, destroy, index, update } from '../api/product'
-import { addOrder } from '../api/order'
+import { add, destroy, index, update } from '../api/product'
 import { DataGrid } from '@mui/x-data-grid'
 import { toast } from 'react-toastify'
-import checkAuth from '../hoc/checkAuth'
+import checkAdmin from '../hoc/checkAdmin'
 import { store } from '../redux/store'
 
 function Product() {
     const [warnings, setWarnings] = useState ({})
     const [loading, setLoading] = useState(null)
-    const [rows,setRows] = useState([])
+    const [rows, setRows] = useState([])
     const [createDialog, setCreateDialog] = useState(false)
     const [editDialog, setEditDialog] = useState(null)
     const [deleteDialog, setDeleteDialog] = useState(null)
@@ -24,16 +23,21 @@ function Product() {
       {field: 'id', headerName:'Products', minWidth: 300},
       {field: 'item', headerName:'Item', minWidth: 300},
       {field: 'price', headerName:'Price', minWidth: 300},
-      {field: 'actions', headerName:'', sortable: false, filterable: false, renderCell: params => (
+      {field: 'actions', headerName:'', sortable: false, filterable: false, hideable: false, renderCell: params => (
         <Box sx={{ display:"flex", gap:2, height:"100%"}}>
             <Button color="info" onClick={() => setEditDialog({...params.row})} variant="contained" sx={{backgroundColor: "#2D9596", margin: 1, boxShadow: "0 0 5px black"}}>Edit</Button>
             <Button color="error" onClick={() => setDeleteDialog(params.row.id)} variant="contained" sx={{backgroundColor: "#265073", margin: 1, boxShadow: "0 0 5px black"}}>Delete</Button>
         </Box>
       ), minWidth: 230}
-    ]                  
+    ]
+    
+    const logout = () => {
+      removeCookie("AUTH_TOKEN")
+      removeCookie("ADMIN_TOKEN")
+    }
   
     const refreshData = () => {
-      index(cookies.AUTH_TOKEN).then(res =>{
+      index(cookies.ADMIN_TOKEN).then(res =>{
         if(res?.ok){
           setRows(res.data)
         }else{
@@ -45,11 +49,12 @@ function Product() {
 
     const onSubmit = (e)=> {
       e.preventDefault()
+      if(!loading){
       const body = {
             item: $("#item").val(),
             price: $("#price").val()
       }
-        addProduct(body, cookies.AUTH_TOKEN).then(res => {
+        add(body, cookies.ADMIN_TOKEN).then(res => {
             if(res?.ok){
                 toast.success(res?.message ?? "Product Added")
                 setCreateDialog(false)
@@ -59,14 +64,17 @@ function Product() {
                 toast.error(res?.message ?? "Something went wrong")
                 setWarnings(res?.errors)
               }
+        }).finally(() => {
+          setLoading(false)
         })
+      }
     }
   
 
   const onDelete = () => {
     if(!loading){
         setLoading(true)
-        destroy(deleteDialog, cookies.AUTH_TOKEN).then(res =>{
+        destroy(deleteDialog, cookies.ADMIN_TOKEN).then(res =>{
             if(res?.ok){
                 toast.success(res.message ?? "Product has been deleted")
                 refreshData()
@@ -88,7 +96,7 @@ const onEdit = e => {
         update({
             item: editDialog.item,
             price: editDialog.price
-        }, editDialog.id, cookies.AUTH_TOKEN).then(res => {
+        }, editDialog.id, cookies.ADMIN_TOKEN).then(res => {
             if(res?.ok){
                 toast.success(res.message ?? "Product has been updated")
                 refreshData()
@@ -103,8 +111,6 @@ const onEdit = e => {
     }
 }
   
-
-
   return (
     <Container>
 
@@ -112,7 +118,7 @@ const onEdit = e => {
       <AppBar position="fixed" sx={{backgroundColor: "#008E9B"}}>
         <Toolbar>
 
-          <Typography id="font" variant="h6" component="div" sx={{ flexGrow:1, color:"black", ml:3 }}>
+          <Typography id="font" variant="h6" component="div" sx={{ flexGrow:1, fontSize: 20 }}>
             Bluepay
           </Typography>
           <Link to="/admin" id="navlink" className="navlink"> 
@@ -127,7 +133,7 @@ const onEdit = e => {
           Products
           </Link>
           |
-          <Link to="/login" id="navlink" className="navlink"> 
+          <Link onClick={(logout)} to="/login" id="navlink" className="navlink"> 
           Logout
           </Link>
         </Toolbar>
@@ -181,7 +187,7 @@ const onEdit = e => {
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={() => setCreateDialog(false)}>Close</Button>
-                  <Button onClick={() => {$("#submit_btn").trigger("click")}}>Create</Button>
+                  <Button disabled={loading} onClick={() => {$("#submit_btn").trigger("click")}}>Create</Button>
                 </DialogActions>
             </Dialog>
 
@@ -249,4 +255,4 @@ const onEdit = e => {
   )
 }
 
-export default checkAuth(Product)
+export default checkAdmin(Product)

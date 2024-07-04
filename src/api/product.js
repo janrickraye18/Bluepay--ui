@@ -11,8 +11,8 @@ export const index = async (token) => {
     return await response.json()
 }
 
-export const addProduct = async (body, token) => {
-    const response = await fetch(`${url}/products/store`,{
+export const add = async (body, token) => {
+    const response = await fetch(`${url}/products`,{
     method: 'POST',
     headers:{
         Accept: 'application/json',
@@ -38,7 +38,7 @@ export const destroy = async ( id, token) => {
         return await response.json()
         }
 
-export const update = async ( body,id, token) => {
+export const update = async ( body, id, token) => {
     const response = await fetch(`${url}/products/${id}?_method=PATCH`,{
         method: 'POST',
         headers:{
