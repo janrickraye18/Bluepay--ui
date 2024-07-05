@@ -4,7 +4,8 @@ import $ from 'jquery'
 import { useCookies } from 'react-cookie'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { addComment, index, showOrder } from '../api/order'
+import { index, showOrder } from '../api/order'
+import { add } from '../api/comment'
 import { DataGrid } from '@mui/x-data-grid'
 import { toast } from 'react-toastify'
 import checkAuth from '../hoc/checkAuth'
@@ -42,6 +43,9 @@ function Dashboard() {
           setRows(res.data)
         }else{
           toast.error(res?.message ?? "Something went wrong")
+          ,{
+            position: "bottom-right",
+          }
         }
       })
     }
@@ -58,13 +62,19 @@ function Dashboard() {
         }
   
       setLoading(true)
-      addComment(body, cookies.AUTH_TOKEN).then(res => {
+      add(body, cookies.AUTH_TOKEN).then(res => {
       if(res?.ok){
-        toast.success(res?.message ?? "Comment Added");
+        toast.success(res?.message ?? "Comment Added")
+        ,{
+          position: "bottom-right",
+        }
         console.log(res)
         setCreateDialog(null)
       }else {
-        toast.error(res?. message ?? "Something went wrong");
+        toast.error(res?. message ?? "Something went wrong")
+        ,{
+          position: "bottom-right",
+        }
         setWarnings(res?.errors)
         setCreateDialog(null)
       }
@@ -111,7 +121,7 @@ function Dashboard() {
           />
           <Dialog open={!!createDialog}>
                 <DialogTitle>
-                  <Typography id="font" >Add Order</Typography>
+                  <Typography id="font" >Send Comment</Typography>
                 </DialogTitle>
                 <DialogContent>
                 <Box component="form" onSubmit={onSubmit} sx={{ width:300, mx:'auto' }}>                                                     
@@ -146,7 +156,7 @@ function Dashboard() {
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={() => setCreateDialog(null)}>Close</Button>
-                  <Button disabled={loading} onClick={() => {$("#submit_btn").trigger("click")}}>Create</Button>
+                  <Button disabled={loading} onClick={() => {$("#submit_btn").trigger("click")}}>Send</Button>
                 </DialogActions>
               </Dialog>
         </Box>

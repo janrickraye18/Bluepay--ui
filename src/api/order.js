@@ -49,19 +49,6 @@ export const indexComment = async (token) => {
         return await response.json()
         }
 
-export const addComment = async (body, token) => {
-        const response = await fetch(`${url}/comments`,{
-            method: 'POST',
-            headers:{
-                Accept: 'application/json',
-                "Content-type": 'application/json',
-                Authorization: `Bearer ${token}`
-            },
-            body:JSON.stringify(body)
-        })
-                
-        return await response.json()
-        }
 
 export const hasPaid = async (id, token) => {
         const response = await fetch(`${url}/orders/${id}`,{

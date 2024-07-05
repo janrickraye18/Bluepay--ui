@@ -42,6 +42,9 @@ function Product() {
           setRows(res.data)
         }else{
           toast.error(res?.message ?? "Something went wrong")
+          ,{
+            position: "bottom-right",
+          }
         }
       })
     }
@@ -57,11 +60,17 @@ function Product() {
         add(body, cookies.ADMIN_TOKEN).then(res => {
             if(res?.ok){
                 toast.success(res?.message ?? "Product Added")
+                ,{
+                  position: "bottom-right",
+                }
                 setCreateDialog(false)
                 refreshData()
                 setWarnings({})
               }else{
                 toast.error(res?.message ?? "Something went wrong")
+                ,{
+                  position: "bottom-right",
+                }
                 setWarnings(res?.errors)
               }
         }).finally(() => {
@@ -77,11 +86,17 @@ function Product() {
         destroy(deleteDialog, cookies.ADMIN_TOKEN).then(res =>{
             if(res?.ok){
                 toast.success(res.message ?? "Product has been deleted")
+                ,{
+                  position: "bottom-right",
+                }
                 refreshData()
                 setDeleteDialog(null)
             }
             else{
                 toast.error(res.message ?? "something went wrong")
+                ,{
+                  position: "bottom-right",
+                }
             }
         }).finally(() => {
             setLoading(false)
@@ -99,11 +114,17 @@ const onEdit = e => {
         }, editDialog.id, cookies.ADMIN_TOKEN).then(res => {
             if(res?.ok){
                 toast.success(res.message ?? "Product has been updated")
+                ,{
+                  position: "bottom-right",
+                }
                 refreshData()
                 setEditDialog(null)
             }
             else{
                 toast.error(res.message ?? "something went wrong")
+                ,{
+                  position: "bottom-right",
+                }
             }
         }).finally(() => {
             setLoading(false)

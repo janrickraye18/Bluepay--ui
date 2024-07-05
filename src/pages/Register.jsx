@@ -31,12 +31,18 @@ export default function Register() {
     setLoading(true)
     register(body).then(res => {
     if(res?.ok){
-      toast.success(res?.message ?? "Account  has been Registered");
+      toast.success(res?.message ?? "Account  has been Registered")
+      ,{
+        position: "bottom-right",
+      }
       setCookie("AUTH_TOKEN", res.data.token)
       dispatch(login(res.data))
       navigate("/dashboard")
     }else {
       toast.error(res?. message ?? "Something went wrong")
+      ,{
+        position: "bottom-right",
+      }
       setWarnings(res?.errors)
     }
      

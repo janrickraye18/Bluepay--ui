@@ -40,6 +40,9 @@ function Order() {
           setRows(res.data)
         }else{
           toast.error(res?.message ?? "Something went wrong")
+          ,{
+            position: "bottom-right",
+          }
         }
       })
     }
@@ -59,12 +62,18 @@ function Order() {
       setLoading(true)
       add(body, cookies.AUTH_TOKEN).then(res => {
       if(res?.ok){
-        toast.success(res?.message ?? "Order Complete");
+        toast.success(res?.message ?? "Order Complete")
+        ,{
+          position: "bottom-right",
+        }
         navigate("/dashboard")
         console.log(res)
         setCreateDialog(null)
       }else {
-        toast.error(res?. message ?? "Something went wrong");
+        toast.error(res?. message ?? "Something went wrong")
+        ,{
+          position: "bottom-right",
+        }
         setWarnings(res?.errors)
         setCreateDialog(null)
       }

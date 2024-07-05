@@ -48,6 +48,9 @@ function Customer() {
           
         }else{
           toast.error(res?.message ?? "Something went wrong")
+          ,{
+            position: "bottom-right",
+          }
         }
       })  
     }
@@ -59,11 +62,17 @@ function Customer() {
             destroy(deleteDialog, cookies.ADMIN_TOKEN).then(res =>{
                 if(res?.ok){
                     toast.success(res.message ?? "Product has been deleted")
+                    ,{
+                      position: "bottom-right",
+                    }
                     refreshData()
                     setDeleteDialog(null)
                 }
                 else{
                     toast.error(res.message ?? "something went wrong")
+                    ,{
+                      position: "bottom-right",
+                    }
                 }
             }).finally(() => {
                 setLoading(false)
@@ -82,11 +91,17 @@ function Customer() {
           }, editDialog.id, cookies.ADMIN_TOKEN).then(res => {
               if(res?.ok){
                   toast.success(res.message ?? "Product has been updated")
+                  ,{
+                    position: "bottom-right",
+                  }
                   refreshData()
                   setEditDialog(null)
               }
               else{
                   toast.error(res.message ?? "something went wrong")
+                  ,{
+                    position: "bottom-right",
+                  }
               }
           }).finally(() => {
               setLoading(false)

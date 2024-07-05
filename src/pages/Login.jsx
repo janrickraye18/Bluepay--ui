@@ -33,9 +33,13 @@ export default function Login() {
             dispatch(login(res.data))
             navigate("/dashboard")
           }
-          toast.success(res?.message ?? "Logged in Succesfully")
+          toast.success(res?.message ?? "Logged in Succesfully"),{
+            position: "bottom-right",
+          }
         }else{
-          toast.error(res?.message ?? "something went wrong")
+        toast.error(res?.message ?? "something went wrong"),{
+          position: "bottom-right",
+        }
           setWarnings(res?.errors)
         }
       })

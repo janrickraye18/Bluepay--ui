@@ -45,6 +45,9 @@ function Admin() {
           setRows(res.data)
         }else{
           toast.error(res?.message ?? "Something went wrong")
+          ,{
+            position: "bottom-right",
+          }
         }
       })
 
@@ -53,6 +56,9 @@ function Admin() {
           setRows2(res.data)
         }else{
           toast.error(res?.message ?? "Something went wrong")
+          ,{
+            position: "bottom-right",
+          }
         }
       })
     }
@@ -69,11 +75,17 @@ function Admin() {
           hasPaid( paidDialog, cookies.ADMIN_TOKEN).then(res =>{
               if(res?.ok){
                   toast.success(res.message ?? "Product has been deleted")
+                  ,{
+                    position: "bottom-right",
+                  }
                   refreshData()
                   setpaidDialog(null)
               }
               else{
                   toast.error(res.message ?? "something went wrong")
+                  ,{
+                    position: "bottom-right",
+                  }
               }
           }).finally(() => {
               setLoading(false)
